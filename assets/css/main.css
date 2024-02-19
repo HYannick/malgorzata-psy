@@ -1,0 +1,99 @@
+:root {
+    font-size: 62.5%;
+    --color-dark: #1B1B1E;
+    --color-light: #FFFFFF;
+    --color-light-transparent: rgba(255, 255, 255, 0.55);
+    --color-primary: #004346;
+    --color-primary-light: #16676B;
+
+    --font-primary: 'Playfair Display', sans-serif;
+    --font-secondary: 'Source Sans Pro', sans-serif;
+
+    --font-size-64: 6.4rem;
+    --font-size-48: 4.8rem;
+    --font-size-32: 3.2rem;
+    --font-size-24: 2.4rem;
+    --font-size-20: 2rem;
+    --font-size-16: 1.6rem;
+}
+
+
+html {
+    height: -webkit-fill-available;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-primary);
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.6;
+    font-size: 1.4rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--color-dark);
+}
+
+.container {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.ov-hidden {
+    overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    font-weight: normal;
+}
+
+.text-display {
+    font-size: var(--font-size-64);
+    @media screen and (max-width: 768px) {
+        font-size: var(--font-size-48);
+    }
+}
+
+.text-title-1 {
+    font-size: var(--font-size-48);
+}
+
+.text-title-2 {
+    font-size: var(--font-size-32);
+}
+
+.text-paragraph-large {
+    font-size: var(--font-size-32);
+    font-family: var(--font-secondary);
+}
+
+.text-paragraph-1 {
+    font-size: var(--font-size-24);
+    font-family: var(--font-secondary);
+}
+
+.text-paragraph-2 {
+    font-size: var(--font-size-20);
+    font-family: var(--font-secondary);
+}
+
+.text-paragraph-3 {
+    font-size: var(--font-size-16);
+    font-family: var(--font-secondary);
+}
+
+.-text-bold {
+    font-weight: 600;
+}
+
+.-text-light {
+    font-weight: 100;
+}
