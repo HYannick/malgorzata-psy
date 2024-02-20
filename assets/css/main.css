@@ -17,6 +17,9 @@
     --font-size-16: 1.6rem;
 }
 
+a {
+    text-decoration: none;
+}
 
 html {
     height: -webkit-fill-available;
@@ -64,6 +67,9 @@ body {
 
 .text-title-1 {
     font-size: var(--font-size-48);
+    @media screen and (max-width: 768px) {
+        font-size: var(--font-size-32);
+    }
 }
 
 .text-title-2 {

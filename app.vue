@@ -5,8 +5,8 @@
     <About/>
     <Psychotherapy/>
     <ReadingRoom/>
-    <Contact />
-    <Footer />
+    <Contact/>
+    <Footer/>
   </div>
 </template>
 <script setup lang="ts">
@@ -21,10 +21,10 @@ import Footer from '~/src/components/Footer.vue';
 useHead({
   title: 'Małgorzata Orzechowska - Psychoterapia',
   meta: [
-    { name: 'description', content: 'Psychoterapia' }
+    {name: 'description', content: 'Psychoterapia'}
   ],
 })
-const {$ScrollTrigger} = useNuxtApp();
+const {$gsap, $ScrollTrigger} = useNuxtApp();
 onMounted(() => {
   $ScrollTrigger.create({
     start: 'top -70',

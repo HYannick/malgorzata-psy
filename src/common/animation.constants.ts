@@ -1,1 +1,2 @@
 export const VERTICAL_TRANSLATION = 100;
+export const MATCH_MEDIA_WIDTH = 800;

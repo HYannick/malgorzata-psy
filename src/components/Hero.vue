@@ -15,8 +15,8 @@
           </div>
         </div>
         <div class="hero__action ov-hidden">
-          <button class="button button__primary -text-light">O MNIE</button>
-          <button class="button button__outline -text-light">O PSYCHOTERAPII</button>
+          <button class="button button__primary -text-light" @click="scrollToSection('about')">O MNIE</button>
+          <button class="button button__outline -text-light"  @click="scrollToSection('psychotherapy')">O PSYCHOTERAPII</button>
         </div>
       </div>
     </div>
@@ -93,17 +93,39 @@
   max-width: 100rem;
   width: 100%;
   background-color: var(--color-dark);
-
+  @media screen and (max-width: 1366px) {
+    max-width: 50%;
+  }
   @media screen and (max-width: 768px) {
     position: relative;
+    max-width: 100%;
     height: 30rem;
     order: 1;
     overflow: hidden;
     border-radius: 1.5rem;
     margin-bottom: 3.6rem;
   }
-}
 
+
+}
+.hero__title p {
+  @media screen and (max-width: 768px) {
+    text-align: center;
+    font-size: var(--font-size-24);
+  }
+}
+.hero__title span {
+  @media screen and (max-width: 768px) {
+    text-align: center;
+    font-size: var(--font-size-32);
+  }
+}
+.hero__content {
+  text-align: left;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
+}
 .hero__image .picture {
   height: 100%;
   object-fit: cover;
@@ -124,6 +146,9 @@
 
 .hero__content {
   max-width: 51rem;
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
 }
 
 .hero__content-title {
@@ -167,7 +192,13 @@
 <script setup lang="ts">
 import {VERTICAL_TRANSLATION} from '~/src/common/animation.constants';
 
+
 const {$gsap} = useNuxtApp();
+
+const scrollToSection = (section: string) => {
+  const sectionElement = document.getElementById(section);
+  $gsap.to(window, {duration: 1.5, scrollTo: sectionElement.offsetTop, ease: "expo.inOut"});
+}
 onMounted(() => {
   const tl = $gsap.timeline();
   tl.to('.hero', { opacity:1, duration: 2, ease: "expo.inOut"})

@@ -18,12 +18,12 @@
             innych
             cech osobowych w kierunku, który korzystający z psychoterapii uważają za pożądany.” Mówiąc prościej to spotkanie terapeuty i
             klienta/pacjenta
-            zmierzające do zmiany przeżywania, myślenia i zachowania ukierunkowane na usunięcie uciążliwych objawów i ich przyczyn...
+            zmierzające do zmiany przeżywania, myślenia i zachowania ukierunkowane na usunięcie uciążliwych objawów i ich przyczyn.
           </p>
         </div>
-        <div data-animate="psychotherapy-actions" class="ov-hidden">
-          <button class="button button__secondary -text-light">CZYTAJ DALEJ</button>
-        </div>
+        <!--        <div data-animate="psychotherapy-actions" class="ov-hidden">-->
+        <!--          <button class="button button__secondary -text-light">CZYTAJ DALEJ</button>-->
+        <!--        </div>-->
       </div>
       <div class="psychotherapy__picture">
         <img
@@ -81,12 +81,15 @@
   display: block;
 
 }
+
 .psychotherapy__heading .psychotherapy__heading-title {
   margin-bottom: 3.6rem;
 }
+
 .psychotherapy__heading .psychotherapy__heading-subtitle {
   margin-bottom: 3.6rem;
 }
+
 .psychotherapy__picture {
   flex: 1;
   overflow: hidden;
@@ -116,52 +119,56 @@ import {VERTICAL_TRANSLATION} from '~/src/common/animation.constants';
 const {$gsap} = useNuxtApp();
 onMounted(() => {
 
+  const mm = $gsap.matchMedia();
 
-  const tl = $gsap.timeline({
-    scrollTrigger: {
-      trigger: ".psychotherapy",
-      start: 'top 80%',
-    }
+  mm.add("(min-width: 800px)", () => {
+    const tl = $gsap.timeline({
+      scrollTrigger: {
+        trigger: ".psychotherapy",
+        start: 'top 80%',
+      }
+    });
+
+    tl
+        .from('.psychotherapy__picture img', {
+          opacity: 0,
+          scale: 1.1,
+          duration: 2,
+          ease: "expo.inOut",
+        }, '-=0.5')
+        .from('[data-animate="psychotherapy-title"] h2', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=1.5')
+        .from('[data-animate="psychotherapy-subtitle"] span', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=1.5')
+        .from('.psychotherapy .divider', {
+          opacity: 1,
+          scaleX: 0,
+          transformOrigin: 'left',
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=1.5')
+        .from('[data-animate="psychotherapy-content"] p ', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 2,
+          ease: "expo.inOut",
+        }, '-=1.6')
+        .from('[data-animate="psychotherapy-actions"] button ', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 2,
+          ease: "expo.inOut",
+        }, '-=1.8');
+
   });
-
-  tl
-      .from('.psychotherapy__picture img', {
-        opacity: 0,
-        scale: 1.1,
-        duration: 2,
-        ease: "expo.inOut",
-      }, '-=0.5')
-      .from('[data-animate="psychotherapy-title"] h2', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=1.5')
-      .from('[data-animate="psychotherapy-subtitle"] span', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=1.5')
-      .from('.psychotherapy .divider', {
-        opacity: 1,
-        scaleX: 0,
-        transformOrigin: 'left',
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=1.5')
-      .from('[data-animate="psychotherapy-content"] p ', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 2,
-        ease: "expo.inOut",
-      }, '-=1.6')
-      .from('[data-animate="psychotherapy-actions"] button ', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 2,
-        ease: "expo.inOut",
-      }, '-=1.8');
 
 })
 </script>

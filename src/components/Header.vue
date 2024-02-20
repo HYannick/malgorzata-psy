@@ -3,8 +3,8 @@
 
     <div class="container">
       <p class="logo text-title-2 -text-bold" @click="scrollToSection('hero')">Małgorzata Orzechowska</p>
-      <div class="navigation">
-        <span class="navigation__close">Close</span>
+      <div class="navigation" :class="{'navigation--open' : navOpen}">
+        <div class="navigation__close" @click="navOpen = false">Close</div>
         <ul>
           <li @click="scrollToSection( 'about')">O mnie</li>
           <li @click="scrollToSection('psychotherapy')">O psychoterapii</li>
@@ -13,7 +13,7 @@
         </ul>
       </div>
       <div class="header__actions">
-        <span class="navigation__menu">Menu</span>
+        <button class="navigation__menu" @click="navOpen = true">Menu</button>
       </div>
     </div>
   </div>
@@ -22,6 +22,9 @@
 .navigation__menu {
   font-family: var(--font-primary);
   font-size: var(--font-size-20);
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .navigation__close {
@@ -43,6 +46,7 @@
   display: flex;
   align-items: center;
   height: 10rem;
+  opacity: 0;
   z-index: 100;
   transition: background-color 0.3s, color 0.3s, height 0.3s;
 }
@@ -52,6 +56,13 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.navigation.navigation--open {
+  @media screen and (max-width: 768px) {
+    opacity: 1;
+    visibility: visible;
+  }
+}
 .navigation {
   @media screen and (max-width: 768px) {
     position: fixed;
@@ -59,14 +70,20 @@
     right: 0;
     left: 0;
     bottom: 0;
+    width: 100%;
+    height: 100vh;
     z-index: 99;
     background: var(--color-light);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
   }
 }
+
 .navigation ul {
   display: flex;
   gap: 3.2rem;
@@ -96,6 +113,12 @@
   height: 5rem;
 }
 
+.header--scrolled .logo {
+  @media screen and (max-width: 768px) {
+    font-size: var(--font-size-16);
+  }
+}
+
 .header--scrolled li {
   color: var(--color-dark);
 }
@@ -122,11 +145,26 @@
 }
 </style>
 <script setup lang="ts">
-import gsap from 'gsap';
+
+const navOpen = ref(false);
+const {$gsap} = useNuxtApp();
 
 const scrollToSection = (section: string) => {
   const sectionElement = document.getElementById(section);
-  gsap.to(window, {duration: 1.5, scrollTo: sectionElement.offsetTop, ease: "expo.inOut"});
+  $gsap.to(window, {duration: 1.5, scrollTo: sectionElement.offsetTop, ease: "expo.inOut"});
+  navOpen.value = false;
 }
+
+onMounted(() => {
+  $gsap.fromTo('.header', {
+    opacity: 0,
+    y: -10,
+  }, {
+    opacity: 1,
+   y:0,
+    duration: 1.5,
+    ease: "expo.inOut",
+  });
+})
 
 </script>

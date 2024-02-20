@@ -19,9 +19,9 @@
             psychoterapia, w czym może Ci pomóc, ile trwa oraz czego spodziewać się po pierwszej konsultacji. W zakładce czytelnia znajdziesz też
             inspirujące treści i polecenia.</p>
         </div>
-        <div class="about__action ov-hidden">
-          <button class="button button__secondary -text-light">CZYTAJ DALEJ</button>
-        </div>
+<!--        <div class="about__action ov-hidden">-->
+<!--          <button class="button button__secondary -text-light">CZYTAJ DALEJ</button>-->
+<!--        </div>-->
       </div>
     </div>
     <div class="about__how">
@@ -139,68 +139,72 @@ import {VERTICAL_TRANSLATION} from '~/src/common/animation.constants';
 
 const {$gsap} = useNuxtApp();
 onMounted(() => {
+  const mm = $gsap.matchMedia();
 
+  mm.add("(min-width: 800px)", () => {
 
-  const tl = $gsap.timeline({
-    scrollTrigger: {
-      trigger: ".about__me",
-      start: 'top 80%',
-    }
+    const tl = $gsap.timeline({
+      scrollTrigger: {
+        trigger: ".about__me",
+        start: 'top 80%',
+      }
+    });
+
+    tl
+        .from('.about__me h2', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=0.3')
+        .from('.about__me span', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=1.5')
+        .from('.about__me .divider', {
+          opacity: 1,
+          scaleX: 0,
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=1.5')
+        .from('.about__content p ', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 2,
+          ease: "expo.inOut",
+        }, '-=1.6')
+        .from('.about__action button ', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 2,
+          ease: "expo.inOut",
+        }, '-=1.8');
+
+    const tl2 = $gsap.timeline({
+      scrollTrigger: {
+        trigger: ".about__how",
+        start: 'top 80%',
+      }
+    });
+
+    tl2
+        .from('[data-animate="about-how-title"] h2', {
+          opacity: 0,
+          y: VERTICAL_TRANSLATION,
+          duration: 1.5,
+          ease: "expo.inOut",
+        }, '-=0.3')
+        .from('.about__perks li p', {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "expo.inOut",
+          stagger: 0.05,
+        }, '-=1')
   });
 
-  tl
-      .from('.about__me h2', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=0.3')
-      .from('.about__me span', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=1.5')
-      .from('.about__me .divider', {
-        opacity: 1,
-        scaleX: 0,
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=1.5')
-      .from('.about__content p ', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 2,
-        ease: "expo.inOut",
-      }, '-=1.6')
-      .from('.about__action button ', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 2,
-        ease: "expo.inOut",
-      }, '-=1.8');
-
-  const tl2 = $gsap.timeline({
-    scrollTrigger: {
-      trigger: ".about__how",
-      start: 'top 80%',
-    }
-  });
-
-  tl2
-      .from('[data-animate="about-how-title"] h2', {
-        opacity: 0,
-        y: VERTICAL_TRANSLATION,
-        duration: 1.5,
-        ease: "expo.inOut",
-      }, '-=0.3')
-      .from('.about__perks li p', {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "expo.inOut",
-        stagger: 0.05,
-      }, '-=1')
 
 })
 </script>
